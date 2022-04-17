@@ -1,5 +1,7 @@
 /*
  * pthreads wrapper functions.
+ * Note that the pthreads functions do not set errno. 
+ * https://linux.die.net/man/7/pthreads
  */
 
 #include	"unpipc.h"
