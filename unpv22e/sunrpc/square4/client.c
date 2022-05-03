@@ -14,7 +14,12 @@ main(int argc, char **argv)
 	cl = Clnt_create(argv[1], SQUARE_PROG, SQUARE_VERS, "tcp");
 
 	auth_destroy(cl->cl_auth);
+#ifdef __linux__
+    cl->cl_auth = authunix_create_default();
+#else
 	cl->cl_auth = authsys_create_default();
+#endif
+
 
 	in.arg1 = atol(argv[2]);
 	if (squareproc_2(&in, &out, cl) != RPC_SUCCESS)

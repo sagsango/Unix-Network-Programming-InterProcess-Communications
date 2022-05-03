@@ -1,9 +1,3 @@
-/*
- * TODO:
- *      Server multithreading is not supported in centos
- *      with -M flag, so was not able to test for it.
- *      Please do test multithreading on some other OS.
- */
 #include	"unpipc.h"
 #include	"square.h"
 

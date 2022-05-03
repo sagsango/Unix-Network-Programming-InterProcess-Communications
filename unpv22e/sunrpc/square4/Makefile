@@ -6,7 +6,9 @@ CFLAGS += -DDEBUG
 all:	${PROGS}
 
 square.h square_clnt.c square_svc.c square_xdr.c:	square.x
-			rpcgen -C -M -A square.x
+#			rpcgen -C -M -A square.x
+			rpcgen -C -M -a square.x
+
 
 square_clnt.o: square_clnt.c square.h
 

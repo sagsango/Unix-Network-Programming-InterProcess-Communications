@@ -6,9 +6,8 @@ CFLAGS += -DDEBUG
 all:	${PROGS}
 
 square.h square_clnt.c square_svc.c square_xdr.c:	square.x
-#			rpcgen -C -M -A square.x	# -A do not support on CentOS
-			rpcgen -C -M -a square.x
-
+#			rpcgen -C -M -A square.x
+			rpcgen -C -M -a square.x -ltli
 
 square_clnt.o: square_clnt.c square.h
 

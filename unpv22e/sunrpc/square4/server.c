@@ -8,11 +8,18 @@ squareproc_2_svc(square_in *inp, square_out *outp, struct svc_req *rqstp)
 	printf("thread %ld started, arg = %ld, auth = %d\n",
 		   pr_thread_id(NULL), inp->arg1, rqstp->rq_cred.oa_flavor);
 	if (rqstp->rq_cred.oa_flavor == AUTH_SYS) {
-		struct authsys_parms	*au;
 
+#ifdef __linux__
+        struct authunix_parms   *au;
+        au = (struct authunix_parms*)rqstp->rq_clntcred;
+        printf("AUTH_SYS: host %s, uid %ld, gid %ld\n",
+               au->aup_machname, (long) au->aup_uid, (long) au->aup_gid);
+#else
+		struct authsys_parms	*au;
 		au = (struct authsys_parms *)rqstp->rq_clntcred;
 		printf("AUTH_SYS: host %s, uid %ld, gid %ld\n",
 			   au->aup_machname, (long) au->aup_uid, (long) au->aup_gid);
+#endif
 	}
 
 	sleep(5);
